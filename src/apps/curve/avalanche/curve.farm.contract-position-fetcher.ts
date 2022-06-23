@@ -11,6 +11,7 @@ import { CURVE_DEFINITION } from '../curve.definition';
 import { CurveChildLiquidityGaugeFactoryAddressHelper } from '../helpers/curve.child-liquidity-gauge-factory.address-helper';
 import { CurveChildLiquidityGaugeRewardTokenStrategy } from '../helpers/curve.child-liquidity-gauge.reward-token-strategy';
 import { CurveChildLiquidityGaugeRoiStrategy } from '../helpers/curve.child-liquidity-gauge.roi-strategy';
+import { remapLabel } from '../helpers/curve.get-positions.remap-label';
 import { CurveRewardsOnlyGaugeRewardTokenStrategy } from '../helpers/curve.rewards-only-gauge.reward-token-strategy';
 import { CurveRewardsOnlyGaugeRoiStrategy } from '../helpers/curve.rewards-only-gauge.roi-strategy';
 
@@ -88,6 +89,6 @@ export class AvalancheCurveFarmContractPositionFetcher implements PositionFetche
       this.getChildLiquidityGaugePositions(),
     ]);
 
-    return [...rewardOnlyGaugePositions, ...childLiquidityGaugePositions];
+    return [...rewardOnlyGaugePositions, ...childLiquidityGaugePositions].map(remapLabel);
   }
 }

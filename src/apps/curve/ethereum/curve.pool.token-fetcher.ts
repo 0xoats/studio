@@ -12,6 +12,7 @@ import { Network } from '~types/network.interface';
 import { CURVE_DEFINITION } from '../curve.definition';
 import { CurveCryptoFactoryPoolTokenHelper } from '../helpers/curve.crypto-factory-pool.token-helper';
 import { CurveFactoryPoolTokenHelper } from '../helpers/curve.factory-pool.token-helper';
+import { remapLabel } from '../helpers/curve.get-positions.remap-label';
 import { CurveV1PoolTokenHelper } from '../helpers/curve.v1-pool.token-helper';
 import { CurveV2PoolTokenHelper } from '../helpers/curve.v2-pool.token-helper';
 
@@ -116,6 +117,6 @@ export class EthereumCurvePoolTokenFetcher implements PositionFetcher<AppTokenPo
     ]);
 
     const tokens = compact([v1Pools, v1MetaPools, v2Pools, v1FactoryPools, v2FactoryPools, cryptoFactoryPools].flat());
-    return uniqBy(tokens, v => v.address);
+    return uniqBy(tokens, v => v.address).map(remapLabel);
   }
 }

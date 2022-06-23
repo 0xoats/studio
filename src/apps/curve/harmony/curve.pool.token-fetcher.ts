@@ -6,6 +6,7 @@ import { AppTokenPosition } from '~position/position.interface';
 import { Network } from '~types/network.interface';
 
 import { CURVE_DEFINITION } from '../curve.definition';
+import { remapLabel } from '../helpers/curve.get-positions.remap-label';
 import { CurveV1PoolTokenHelper } from '../helpers/curve.v1-pool.token-helper';
 import { CurveV2PoolTokenHelper } from '../helpers/curve.v2-pool.token-helper';
 
@@ -46,6 +47,6 @@ export class HarmonyCurvePoolTokenFetcher implements PositionFetcher<AppTokenPos
       }),
     ]);
 
-    return [v1Pools, v2Pools].flat();
+    return [v1Pools, v2Pools].flat().map(remapLabel);
   }
 }

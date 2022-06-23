@@ -7,6 +7,7 @@ import { Network } from '~types/network.interface';
 
 import { CURVE_DEFINITION } from '../curve.definition';
 import { CurveFactoryPoolTokenHelper } from '../helpers/curve.factory-pool.token-helper';
+import { remapLabel } from '../helpers/curve.get-positions.remap-label';
 import { CurveV1PoolTokenHelper } from '../helpers/curve.v1-pool.token-helper';
 
 import { CURVE_V1_POOL_DEFINITIONS } from './curve.pool.definitions';
@@ -46,6 +47,6 @@ export class OptimismCurvePoolTokenFetcher implements PositionFetcher<AppTokenPo
       }),
     ]);
 
-    return [v1Pools, v2FactoryPools].flat();
+    return [v1Pools, v2FactoryPools].flat().map(remapLabel);
   }
 }

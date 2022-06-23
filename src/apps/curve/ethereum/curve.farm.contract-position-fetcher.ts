@@ -12,6 +12,7 @@ import { CURVE_DEFINITION } from '../curve.definition';
 import { CurveFactoryGaugeAddressHelper } from '../helpers/curve.factory-gauge.address-helper';
 import { CurveGaugeIsActiveStrategy } from '../helpers/curve.gauge.is-active-strategy';
 import { CurveGaugeRoiStrategy } from '../helpers/curve.gauge.roi-strategy';
+import { remapLabel } from '../helpers/curve.get-positions.remap-label';
 
 export const FARMS = {
   single: [
@@ -231,6 +232,6 @@ export class EthereumCurveFarmContractPositionFetcher implements PositionFetcher
       this.getDoubleGaugeFarms(),
       this.getNGaugeFarms(),
       this.getNGaugeV2Farms(),
-    ]).then(v => v.flat());
+    ]).then(v => v.flat().map(remapLabel));
   }
 }
